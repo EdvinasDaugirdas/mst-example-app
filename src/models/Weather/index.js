@@ -1,6 +1,6 @@
 import { types } from 'mobx-state-tree'
 
-export const Weather = types
+const Weather = types
     .model({
         city: types.string,
         description: types.string,
@@ -8,7 +8,9 @@ export const Weather = types
         degrees: types.number
     })
     .actions(self => ({
-        changeDescription(newDescription) {
-            self.description = newDescription
+        changeCityName: newName => {
+            self.city = newName
         }
     }))
+
+export default Weather
