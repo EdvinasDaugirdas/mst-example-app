@@ -10,6 +10,9 @@ const Weather = types
     .actions(self => ({
         changeCityName: newName => {
             self.city = newName
+        },
+        fetchWeatherDetails: (cityName = self.city) => {
+            console.log('fetch weather details', cityName)
         }
     }))
 

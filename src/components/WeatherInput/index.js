@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import TextField from 'material-ui/TextField'
+import debounce from 'lodash/debounce'
 
 class WeatherInput extends Component {
     render() {
@@ -21,7 +22,12 @@ class WeatherInput extends Component {
 
     changeCityName = e => {
         this.props.weather.changeCityName(e.target.value)
+        this.fetchCities()
     }
+
+    fetchCities = debounce(() => {
+        this.props.weather.fetchWeatherDetails()
+    }, 500)
 }
 
 const mapper = ({ appStore }) => ({
