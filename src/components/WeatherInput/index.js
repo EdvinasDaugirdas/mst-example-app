@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import TextField from 'material-ui/TextField'
 
 class WeatherInput extends Component {
     render() {
         const { weather } = this.props
-
+        
         return (
             <div>
-                <input 
-                    type="text"
+                <TextField
+                    type="search" 
                     name="city"
+                    label="City"
                     value={weather.city}
                     onChange={this.changeCityName} 
                 />

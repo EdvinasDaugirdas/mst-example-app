@@ -27,6 +27,7 @@
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
+    "material-ui": "^1.0.0-beta.45",
     "mobx": "^4.2.0",
     "mobx-react": "^5.1.2",
     "mobx-state-tree": "^2.0.4",
@@ -85,7 +86,10 @@
       "node",
       "mjs"
     ],
-    "moduleDirectories": ["node_modules", "src"]
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
   },
   "babel": {
     "presets": [
