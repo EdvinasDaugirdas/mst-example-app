@@ -1,12 +1,7 @@
-import Weather from './Weather'
+import Weather, { initialState as initialWeatherState } from './Weather'
 
 const createStore = () => ({
-    weather: Weather.create({
-        city: '',
-        description: '',
-        unit: 'celsius',
-        degrees: 0
-    }),
+    weather: Weather.create(initialWeatherState),
 })
 
 export default createStore

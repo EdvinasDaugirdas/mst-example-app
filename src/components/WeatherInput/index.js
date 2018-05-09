@@ -6,17 +6,15 @@ import debounce from 'lodash/debounce'
 class WeatherInput extends Component {
     render() {
         const { weather } = this.props
-        
+
         return (
-            <div>
-                <TextField
-                    type="search" 
-                    name="city"
-                    label="City"
-                    value={weather.city}
-                    onChange={this.changeCityName} 
-                />
-            </div>
+            <TextField
+                type="search" 
+                name="city"
+                label="City"
+                value={weather.city}
+                onChange={this.changeCityName} 
+            />
         )
     }
 
