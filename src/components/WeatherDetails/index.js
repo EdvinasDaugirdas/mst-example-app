@@ -1,30 +1,32 @@
 import React, { Component, Fragment } from 'react'
 import { inject, observer } from 'mobx-react'
-import Paper from 'material-ui/Paper'
-import Typography from 'material-ui/Typography'
 
 class WeatherDetails extends Component {
     render() {
         const { weather: { city, description, degrees } } = this.props
 
         return (
-            <Paper>
-                <Typography variant="headline">
+            <div>
+                <h4 variant="headline">
                     { city || 'Start typing in city name' }
-                </Typography>
+                </h4>
 
-                <Typography variant="body1">
-                    { description && degrees ? (
+                <p variant="body1">
+                    { description ? (
                         <Fragment>
                             Description: {description}
                             <br />
-                            Degrees: {degrees}
+
+                            { 
+                                description !== 'city not found' && 
+                                <Fragment>{degrees}</Fragment> 
+                            }
                         </Fragment>
                     ) : (
                         'Waiting for description' 
                     )}
-                </Typography>
-            </Paper>
+                </p>
+            </div>
         )
     }
 }

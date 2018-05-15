@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import TextField from 'material-ui/TextField'
 import debounce from 'lodash/debounce'
 
 class WeatherInput extends Component {
@@ -8,7 +7,7 @@ class WeatherInput extends Component {
         const { weather } = this.props
 
         return (
-            <TextField
+            <input
                 type="search" 
                 name="city"
                 label="City"

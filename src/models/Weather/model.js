@@ -13,9 +13,12 @@ const Weather = types
         isFetching: types.boolean,
     })
     .actions(self => {
-        const setDefaultDegreesDescr = () => {
-            self.description = initialState.description
-            self.degreesCelsius = initialState.degreesCelsius
+        const setDescrAndDegrees = (
+            description = initialState.description,
+            degreesCelsius = initialState.degreesCelsius
+        ) => {
+            self.description = description
+            self.degreesCelsius = degreesCelsius
         }
 
         return {
@@ -24,7 +27,7 @@ const Weather = types
             },
             fetchWeatherDetails: flow(function* (cityName = self.city) {
                 if (cityName.trim() === '') {
-                    setDefaultDegreesDescr()
+                    setDescrAndDegrees()
                     return
                 }
     
@@ -34,7 +37,8 @@ const Weather = types
                     self.description = weather[0].description
                     self.degreesCelsius = main.temp
                 } catch (e) {
-                    setDefaultDegreesDescr()
+                    const { message } = e.response.data
+                    setDescrAndDegrees(message)
                 }
             }),
         }
