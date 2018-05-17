@@ -22,26 +22,37 @@ const Weather = types
             self.degreesCelsius = degreesCelsius
         }
 
+        const fetchWeatherDetailsService = (cityName) => {
+            const rootUrl = createWeatherUrl('weather')
+            const url = `${rootUrl}&q=${cityName}&units=metric`
+            return axios.get(url)
+        }
+
         return {
             changeCityName(newName) {
                 self.city = newName
             },
-            fetchWeatherDetails: flow(function* (cityName = self.city) {
+            fetchWeatherDetails: flow(function* (
+                cityName = self.city, 
+                service = fetchWeatherDetailsService
+            ) {
+                self.isFetching = true
+
                 if (cityName.trim() === '') {
                     setDescrAndDegrees()
                     return
                 }
     
                 try {
-                    const rootUrl = createWeatherUrl('weather')
-                    const url = `${rootUrl}&q=${cityName}&units=metric`
-                    const { data: { main, weather } } = yield axios.get(url)
+                    const { data: { main, weather } } = yield service(cityName)
                     self.description = weather[0].description
                     self.degreesCelsius = main.temp
                 } catch (e) {
                     const { message } = e.response.data
                     setDescrAndDegrees(message)
                 }
+
+                self.isFetching = true
             }),
         }
     })
