@@ -2,7 +2,7 @@ import { types, flow } from 'mobx-state-tree'
 import axios from 'axios'
 
 import initialState from './initialState'
-import { WEATHER_URL } from 'constants/api'
+import { createWeatherUrl } from 'helpers/api'
 
 const Weather = types
     .model({
@@ -11,6 +11,7 @@ const Weather = types
         unit: types.enumeration('unit', ['celsius', 'kelvin']),
         degreesCelsius: types.number,
         isFetching: types.boolean,
+        date: types.optional(types.string, '')
     })
     .actions(self => {
         const setDescrAndDegrees = (
@@ -32,7 +33,8 @@ const Weather = types
                 }
     
                 try {
-                    const url = `${WEATHER_URL}&q=${cityName}&units=metric`
+                    const rootUrl = createWeatherUrl('weather')
+                    const url = `${rootUrl}&q=${cityName}&units=metric`
                     const { data: { main, weather } } = yield axios.get(url)
                     self.description = weather[0].description
                     self.degreesCelsius = main.temp
@@ -46,9 +48,9 @@ const Weather = types
     .views(self => ({
         get degrees() {
             if (self.unit === 'celsius') {
-                return self.degreesCelsius
+                return `${self.degreesCelsius} °C`
             } else if (self.unit === 'kelvin') {
-                return self.degreesCelsius + 273.5
+                return `${self.degreesCelsius + 273.5} K`
             }
         }
     }))

@@ -94,6 +94,7 @@ module.exports = {
       'models': path.resolve('src/models'),
       'pages': path.resolve('src/pages'),
       'constants': path.resolve('src/constants'),
+      'helpers': path.resolve('src/helpers'),
 
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
