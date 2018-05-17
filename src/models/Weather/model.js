@@ -52,7 +52,7 @@ const Weather = types
                     setDescrAndDegrees(message)
                 }
 
-                self.isFetching = true
+                self.isFetching = false
             }),
         }
     })
