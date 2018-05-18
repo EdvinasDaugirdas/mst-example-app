@@ -4,9 +4,7 @@ export default function listener(store) {
     const { weather, forecast } = store
 
     onAction(weather, ({ name }) => {
-        const isFetchDetailsFn = name === 'fetchWeatherDetails'
-
-        if (isFetchDetailsFn) {
+        if (name === 'fetchWeatherDetails') {
             forecast.fetchForecast(weather.city)
         }
     })
