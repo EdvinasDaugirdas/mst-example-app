@@ -1,9 +1,17 @@
-import Weather, { initialState as initialWeatherState } from './Weather'
-import Forecast, { initialState as initialForecastState } from './Forecast'
+import Weather, { 
+    initialState as initialWeatherState 
+} from './Weather'
 
-const createStore = () => ({
+import Forecast, { 
+    initialState as initialForecastState, 
+    listeners as forecastListeners
+} from './Forecast'
+
+const store = {
     weather: Weather.create(initialWeatherState),
     forecast: Forecast.create(initialForecastState)
-})
+}
 
-export default createStore
+forecastListeners(store)
+
+export default () => store

@@ -35,6 +35,7 @@ const Forecast = types
                         ))
                     )
                 } catch (e) {
+                    self.weathers = []
                     console.warn(e)
                 }
 
